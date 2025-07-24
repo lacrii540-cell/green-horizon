@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apply for Property</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script src="https://www.paypal.com/sdk/js?client-id=Aa67oz2bF1B_MH3MW6Ro2JP1tAdgle23Qan291R011CEwoE0y3TecL3C1EEuzanm7ER0B83RZEqxl2PB"></script>
+</head>
+<body>
+  <header>
+    <h1>Apply Now</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="listings.html">Listings</a>
+      <a href="apply.html">Apply</a>
+    </nav>
+  </header>
+  <main>
+    <form id="applicationForm">
+      <label>Full Name: <input type="text" name="name" required></label><br>
+      <label>Email: <input type="email" name="email" required></label><br>
+      <label>Property Name: <input type="text" name="property" required></label><br>
+    </form>
+    
+    <div id="paypal-button-container"></div>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
