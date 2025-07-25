@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Apply for Property</title>
-  <link rel="stylesheet" href="style.css"/>
-  <script src="https://www.paypal.com/sdk/js?client-id=Aa67oz2bF1B_MH3MW6Ro2JP1tAdgle23Qan291R011CEwoE0y3TecL3C1EEuzanm7ER0B83RZEqxl2PB"></script>
+  ...
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Green+Horizon+Real+Estate" />
+  ...
 </head>
+
 <body>
   <header>
     <h1>Apply Now</h1>
@@ -16,15 +15,51 @@
       <a href="apply.html">Apply</a>
     </nav>
   </header>
+
   <main>
+    <section>
+      <p><strong>Note:</strong> A <strong>non-refundable application fee of $10</strong> is required to submit your application.</p>
+    </section>
+
     <form id="applicationForm">
       <label>Full Name: <input type="text" name="name" required></label><br>
       <label>Email: <input type="email" name="email" required></label><br>
       <label>Property Name: <input type="text" name="property" required></label><br>
     </form>
-    
-    <div id="paypal-button-container"></div>
+
+    <div id="paypal-button-container" style="margin-top: 20px;"></div>
   </main>
-  <script src="script.js"></script>
+
+  <script>
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            description: "Green Horizon Application Fee",
+            amount: {
+              value: '10.00', // 💵 Adjust the amount here if needed
+              currency_code: 'USD'
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('✅ Payment completed by ' + details.payer.name.given_name);
+
+          // Optional: Submit form or redirect
+          document.getElementById('applicationForm').submit();
+        });
+      },
+      onCancel: function(data) {
+        alert('❌ Payment cancelled. Please complete payment to apply.');
+      },
+      onError: function(err) {
+        console.error(err);
+        alert('⚠️ An error occurred with PayPal. Try again.');
+      }
+    }).render('#paypal-button-container');
+  </script>
 </body>
 </html>
+
